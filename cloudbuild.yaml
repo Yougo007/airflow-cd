@@ -1,0 +1,21 @@
+timeout: 1200s
+substitutions:
+  _REGION: us-central1-c
+  _CLUSTER:  yougo-projects-labs
+steps:
+  - name: gcr.io/cloud-builders/kubectl
+    id: Configure kubectl
+    args:
+      - cluster-info
+    env:
+      - CLOUDSDK_COMPUTE_REGION=$_REGION
+      - CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER
+      - KUBECONFIG=/workspace/.kube/config
+      
+  - name: gcr.io/yougo-projects/helm:latest
+    id: Deploy chart
+    args: ['upgrade', '--install', 'upgrade --install airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true']
+    env:
+      - HELM_EXPERIMENTAL_OCI=1
+      - KUBECONFIG=/workspace/.kube/config
+      - TILLERLESS=true
