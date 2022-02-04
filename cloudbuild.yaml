@@ -3,7 +3,7 @@ substitutions:
   _REGION: us-central1-c
   _CLUSTER:  kubeflow-labs
 steps:
-  - name: gcr.io/cloud-builders/kubectl
+  - name: gcr.io/cloud-builders/cloud-builders-helm
     id: Configure kubectl
     args:
       - cluster-info
