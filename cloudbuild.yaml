@@ -12,7 +12,7 @@ steps:
       - CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER
       - KUBECONFIG=/workspace/.kube/config
       
-  - name: gcr.io/yougo-projects/helm:latest
+  - name: gcr.io/yougo-projects-labs/helm
     id: Deploy chart
     args: ['upgrade', '--install', '--namespace', 'airflow', 'upgrade --install airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true']
     env:
