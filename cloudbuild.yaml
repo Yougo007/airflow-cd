@@ -1,7 +1,7 @@
 timeout: 1200s
 substitutions:
   _REGION: us-central1-c
-  _CLUSTER:  kubeflow-labs
+  _CLUSTER:  yougo-projects-labs-gke
 steps:
   - name: gcr.io/cloud-builders/cloud-builders-helm
     id: Configure kubectl
@@ -14,7 +14,7 @@ steps:
       
   - name: gcr.io/yougo-projects/helm:latest
     id: Deploy chart
-    args: ['upgrade', '--install', 'upgrade --install airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true']
+    args: ['upgrade', '--install', '--namespace', 'airflow', 'upgrade --install airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true']
     env:
       - HELM_EXPERIMENTAL_OCI=1
       - KUBECONFIG=/workspace/.kube/config
