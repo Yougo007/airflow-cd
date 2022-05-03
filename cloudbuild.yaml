@@ -14,7 +14,7 @@ steps:
       
   - name: gcr.io/yougo-projects-labs/helm
     id: Deploy chart
-    args: ['upgrade', '--install', '--namespace', 'airflow', 'upgrade --install airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true']
+    args: ['upgrade', '--install', 'airflow apache-airflow/airflow   --set dags.persistence.enabled=true   --set dags.gitSync.enabled=true', '--namespace', 'airflow']
     env:
       - HELM_EXPERIMENTAL_OCI=1
       - KUBECONFIG=/workspace/.kube/config
