@@ -3,7 +3,7 @@ substitutions:
   _REGION: us-central1-c
   _CLUSTER:  yougo-projects-labs-gke
 steps:
-  - name: gcr.io/cloud-builders/cloud-builders-helm
+  - name: gcr.io/cloud-builders/kubectl
     id: Configure kubectl
     args:
       - cluster-info
